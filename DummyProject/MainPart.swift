@@ -15,23 +15,32 @@ struct MainPart: View {
 
     var body: some View {
         ZStack {
+            LinearGradient(gradient: Gradient(colors: [Color.indigo, Color.purple]), startPoint: .top, endPoint: .bottom)
+                .opacity(1)
+                .edgesIgnoringSafeArea(.all)
+            
+            
             VStack(spacing: 1) {
                 HStack {
                     Text("App Title")
+                        .foregroundStyle(.white)
                     Spacer()
                     Button {
                         // other screen
                         selectedTask = .taskJoin
                     } label: {
                         Image(systemName: "plus.circle")
+                            .foregroundStyle(.white)
                             .foregroundStyle(.blue)
                     }
                 }
                 .font(.largeTitle)
                 .bold(true)
+                
 
                 HStack {
                     Text("List")
+                        .foregroundStyle(.white)
                         .padding(.top)
                         .font(.headline)
                     Spacer()
@@ -56,20 +65,27 @@ struct MainPart: View {
                                             .font(.headline)
                                             .foregroundStyle(.black)
                                     }
+                                    .disabled(popOver)
                                     Spacer()
                                     Button {
-                                        popOver = true
+                                        withAnimation(.easeInOut) {
+                                            popOver.toggle()
+                                        }
                                         indexed = index
                                     } label: {
                                         Image(systemName: "line.3.horizontal")
                                             .foregroundStyle(.black)
                                     }
+                                    .disabled(popOver)
                                     
                                     .padding()
                                     
                                 }
                                 
                             }
+                            .background(.white)
+                            .cornerRadius(5)
+                            
                         
                     }
                     .padding(.top)
@@ -80,13 +96,16 @@ struct MainPart: View {
 
             if popOver {
                 RoundedRectangle(cornerRadius: 10)
-                    .fill(.gray)
+//                    .fill(.gray)
+                    .foregroundStyle(.linearGradient(colors: [.black.opacity(0.7), .black.opacity(0.8),.black.opacity(0.9), .black], startPoint: .top, endPoint: .bottom))
                     .frame(maxWidth: 250, maxHeight: 250)
                     .overlay(alignment: .top) {
                         VStack {
                             HStack(alignment: .top) {
                                 Button {
-                                    popOver = false
+                                    withAnimation(.easeInOut) {
+                                        popOver.toggle()
+                                    }
                                 } label: {
                                     Image(systemName: "xmark")
                                         .foregroundStyle(.white)
