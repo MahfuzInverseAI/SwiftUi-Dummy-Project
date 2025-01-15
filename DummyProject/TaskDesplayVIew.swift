@@ -12,13 +12,18 @@ func displayTask(type: String, name: String) -> some View {
     VStack(spacing: 0) {
         HStack {
             Text(type)
+                .font(.title3)
+                .foregroundStyle(.white)
+
             Spacer()
         }
         Rectangle()
             .stroke(lineWidth: 5)
-            .cornerRadius(5)
             .frame(maxWidth: .infinity)
             .frame(height: 50)
+            .cornerRadius(5)
+            .background(.white)
+            .cornerRadius(5)
             .overlay {
                 HStack {
                     Spacer()
@@ -38,41 +43,40 @@ struct TaskDesplayVIew: View {
         .isLandscape
 
     var body: some View {
-        VStack {
-            VStack {
-                HStack {
-                    Button("Back") {
-                        selectedTask = .mainPart
+        NavigationStack {
+            ZStack {
+                LinearGradient(
+                    gradient: Gradient(colors: [Color.indigo, Color.purple]),
+                    startPoint: .top, endPoint: .bottom
+                )
+                .opacity(1)
+                .edgesIgnoringSafeArea(.all)
+
+                ZStack(alignment: .top) {
+                    Color.clear
+                        .navigationBarItems(
+                            leading: Button("Back") {
+
+                            }
+                            .font(.title2)
+                            .foregroundColor(Color.white)
+                        )
+                    VStack(spacing: 40) {
+
+                        displayTask(type: "Title", name: task.title)
+                        displayTask(
+                            type: "Description",
+                            name: task.description)
+                        displayTask(
+                            type: "Date and Time",
+                            name: task.getTime())
+
                     }
-                    Spacer()
-                    
-                }
-                //            .padding()
-                .font(.title2)
-                .foregroundStyle(.black)
-                
-                Rectangle()
-                    .fill(.white)
-                    .overlay(alignment: .top) {
-                        VStack(spacing: 40) {
-                            
-                            displayTask(type: "Title", name: task.title)
-                            displayTask(
-                                type: "Description",
-                                name: task.description)
-                            displayTask(
-                                type: "Date and Time",
-                                name: task.getTime())
-                            
-                        }
-                    }
-                
+                }.padding()
+
             }
-//            .padding()
-//            Spacer()
 
         }
-        //        Spacer()
 
     }
 }

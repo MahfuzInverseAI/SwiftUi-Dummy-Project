@@ -13,42 +13,30 @@ struct TaskDeleteView: View {
     @Binding var indexed: Int?
     var body: some View {
         ZStack {
-            Color.gray.opacity(0.2)
-            RoundedRectangle(cornerRadius: 10)
-                .fill(.gray)
-                .frame(maxWidth: 250, maxHeight: 100)
-                .overlay(alignment: .top) {
-                    VStack {
-                        Spacer()
-                        HStack {
-                            Spacer()
-                            Button {
-                                tasks.remove(at: indexed!)
-                                selectedTask = .mainPart
+            LinearGradient(
+                gradient: Gradient(colors: [Color.indigo, Color.purple]),
+                startPoint: .top, endPoint: .bottom
+            )
+            .opacity(0.5)
+            .edgesIgnoringSafeArea(.all)
 
-                            } label: {
-                                Text("Yes")
-                                    .font(.largeTitle)
-                            }
-                            Spacer()
-                            Spacer()
-                            Spacer()
-                            Button {
-                                selectedTask = .mainPart
-                            } label: {
-                                Text("No")
-                                    .font(.largeTitle)
+            Color.clear
+                .opacity(0)
+                .alert(isPresented: .constant(true)) {
+                    Alert(
+                        title: Text("Are you sure?"),
+                        message: Text(""),
+                        primaryButton: .destructive(Text("Yes")) {
+                            tasks.remove(at: indexed!)
+                            selectedTask = .mainPart
 
-                            }
-                            Spacer()
+                        },
+                        secondaryButton: .cancel(Text("No")) {
+                            selectedTask = .mainPart
                         }
-                        //                    .padding()
-                        .foregroundStyle(.white.opacity(0.8))
-                        Spacer()
-                    }
+                    )
                 }
         }
-
     }
 }
 
@@ -68,7 +56,7 @@ struct TaskDeleteView: View {
             dateTime: Date(timeIntervalSinceNow: 30)),
     ]
     @Previewable @State var selectedTask: TaskStatus = .mainPart
-    @Previewable @State var indexed: Int? = nil
+    @Previewable @State var indexed: Int? = 1
     TaskDeleteView(
         tasks: $tasks, selectedTask: $selectedTask, indexed: $indexed)
 }
