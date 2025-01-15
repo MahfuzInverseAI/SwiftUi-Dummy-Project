@@ -15,13 +15,11 @@ struct MainPart: View {
 
     var body: some View {
         ZStack {
-            LinearGradient(
-                gradient: Gradient(colors: [Color.indigo, Color.purple]),
-                startPoint: .top, endPoint: .bottom
-            )
-            .opacity(1)
-            .edgesIgnoringSafeArea(.all)
-
+            LinearGradient(gradient: Gradient(colors: [Color.indigo, Color.purple]), startPoint: .top, endPoint: .bottom)
+                .opacity(1)
+                .edgesIgnoringSafeArea(.all)
+            
+            
             VStack(spacing: 1) {
                 HStack {
                     Text("App Title")
@@ -38,6 +36,7 @@ struct MainPart: View {
                 }
                 .font(.largeTitle)
                 .bold(true)
+                
 
                 HStack {
                     Text("List")
@@ -78,7 +77,7 @@ struct MainPart: View {
                                             .foregroundStyle(.black)
                                     }
                                     .disabled(popOver)
-
+                                    
                                     .padding()
 
                                 }
@@ -96,14 +95,8 @@ struct MainPart: View {
 
             if popOver {
                 RoundedRectangle(cornerRadius: 10)
-                    //                    .fill(.gray)
-                    .foregroundStyle(
-                        .linearGradient(
-                            colors: [
-                                .black.opacity(0.7), .black.opacity(0.8),
-                                .black.opacity(0.9), .black,
-                            ], startPoint: .top, endPoint: .bottom)
-                    )
+//                    .fill(.gray)
+                    .foregroundStyle(.linearGradient(colors: [.black.opacity(0.7), .black.opacity(0.8),.black.opacity(0.9), .black], startPoint: .top, endPoint: .bottom))
                     .frame(maxWidth: 250, maxHeight: 250)
                     .overlay(alignment: .top) {
                         VStack {

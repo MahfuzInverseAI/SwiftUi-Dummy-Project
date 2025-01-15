@@ -43,26 +43,22 @@ struct TaskDesplayVIew: View {
         .isLandscape
 
     var body: some View {
-        NavigationStack {
-            ZStack {
-                LinearGradient(
-                    gradient: Gradient(colors: [Color.indigo, Color.purple]),
-                    startPoint: .top, endPoint: .bottom
-                )
-                .opacity(1)
-                .edgesIgnoringSafeArea(.all)
-
+        NavigationStack{
+            ZStack{
+                LinearGradient(gradient: Gradient(colors: [Color.indigo, Color.purple]), startPoint: .top, endPoint: .bottom)
+                    .opacity(1)
+                    .edgesIgnoringSafeArea(.all)
+                
                 ZStack(alignment: .top) {
                     Color.clear
-                        .navigationBarItems(
-                            leading: Button("Back") {
-
-                            }
+                        .navigationBarItems(leading: Button("Back"){
+                            
+                        }
                             .font(.title2)
                             .foregroundColor(Color.white)
                         )
                     VStack(spacing: 40) {
-
+                        
                         displayTask(type: "Title", name: task.title)
                         displayTask(
                             type: "Description",
@@ -70,12 +66,13 @@ struct TaskDesplayVIew: View {
                         displayTask(
                             type: "Date and Time",
                             name: task.getTime())
-
+                        
                     }
+
                 }.padding()
-
+                
             }
-
+            
         }
 
     }

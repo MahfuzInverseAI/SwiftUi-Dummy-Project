@@ -13,12 +13,10 @@ struct TaskDeleteView: View {
     @Binding var indexed: Int?
     var body: some View {
         ZStack {
-            LinearGradient(
-                gradient: Gradient(colors: [Color.indigo, Color.purple]),
-                startPoint: .top, endPoint: .bottom
-            )
-            .opacity(0.5)
-            .edgesIgnoringSafeArea(.all)
+//            Color.gray.opacity(0.5)
+            LinearGradient(gradient: Gradient(colors: [Color.indigo, Color.purple]), startPoint: .top, endPoint: .bottom)
+                .opacity(0.5)
+                .edgesIgnoringSafeArea(.all)
 
             Color.clear
                 .opacity(0)
