@@ -52,7 +52,7 @@ struct TaskDesplayVIew: View {
                 ZStack(alignment: .top) {
                     Color.clear
                         .navigationBarItems(leading: Button("Back"){
-                            
+                            selectedTask = .mainPart
                         }
                             .font(.title2)
                             .foregroundColor(Color.white)
