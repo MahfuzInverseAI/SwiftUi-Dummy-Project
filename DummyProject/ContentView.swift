@@ -7,25 +7,7 @@
 
 import SwiftUI
 
-struct TaskViewModel: Hashable {
-    let id = UUID().uuidString
 
-    let title: String
-    let description: String
-    let dateTime: Date
-
-    func getTime() -> String {
-        return dateTime.formatted(date: .long, time: .shortened)
-    }
-}
-
-enum TaskStatus {
-    case mainPart
-    case taskDisplay
-    case taskJoin
-    case taskUpdate
-    case taskDelete
-}
 
 let pass = VStack {}
 
