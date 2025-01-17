@@ -53,21 +53,37 @@ struct MainPart: View {
                                         }
                                         .disabled(popOver)
                                         Spacer()
-                                        Button {
-                                            withAnimation(.easeInOut) {
-                                                popOver.toggle()
+                                        Menu {
+                                            VStack(alignment: .center) {
+                                                Button {
+                                                    indexed = index
+                                                    withAnimation(.default) {
+                                                        selectedTask =
+                                                            .taskUpdate
+                                                    }
+                                                } label: {
+                                                    Text("Update")
+                                                }
+                                                Button {
+                                                    indexed = index
+                                                    withAnimation(.default) {
+                                                        selectedTask =
+                                                            .taskDelete
+                                                    }
+
+                                                } label: {
+                                                    Text("Delete")
+                                                }
+
                                             }
-                                            indexed = index
                                         } label: {
                                             Image(
                                                 systemName: "line.3.horizontal"
                                             )
                                             .foregroundStyle(.black)
                                         }
-                                        .disabled(popOver)
-
+                                        .bold()
                                         .padding()
-
                                     }
 
                                 }
@@ -79,93 +95,21 @@ struct MainPart: View {
                     }
                 }
                 .padding()
-
-                if popOver {
-                    RoundedRectangle(cornerRadius: 10)
-                        //                    .fill(.gray)
-                        .foregroundStyle(
-                            .linearGradient(
-                                colors: [
-                                    .black.opacity(0.7), .black.opacity(0.8),
-                                    .black.opacity(0.9), .black,
-                                ], startPoint: .top, endPoint: .bottom)
-                        )
-                        .frame(maxWidth: 250, maxHeight: 250)
-                        .overlay(alignment: .top) {
-                            VStack {
-                                HStack(alignment: .top) {
-                                    Button {
-                                        withAnimation(.easeInOut) {
-                                            popOver.toggle()
-                                        }
-                                    } label: {
-                                        Image(systemName: "xmark")
-                                            .foregroundStyle(.white)
-                                            .padding()
-                                            .scaledToFit()
-                                    }
-                                    Spacer()
-
-                                }
-
-                                Spacer()
-
-                                Divider()
-                                    //                                .frame(height: 1)
-                                    .background(.white)
-                                    .padding(.horizontal)
-
-                                Button {
-                                    selectedTask = .taskUpdate
-                                    popOver = false
-                                } label: {
-                                    Text("Update")
-                                        .foregroundStyle(.white)
-                                        .bold()
-                                        .font(.headline)
-
-                                }
-
-                                Divider()
-                                    //                                .frame(height: 1)
-                                    .background(.white)
-                                    .padding(.horizontal)
-
-                                Button {
-                                    selectedTask = .taskDelete
-                                    popOver = false
-                                } label: {
-                                    Text("Delete")
-                                        .foregroundStyle(.white)
-                                        .bold()
-                                        .font(.headline)
-
-                                }
-
-                                Divider()
-                                    //                                .frame(height: 1)
-                                    .background(.white)
-                                    .padding(.horizontal)
-
-                                Spacer()
-
-                            }
-                        }
-
-                }
             }
-            .navigationBarItems(leading: Text("App Title").font(.largeTitle)
-                .foregroundStyle(.white)
-                                ,
-                                trailing: Button {
-                
-                selectedTask = .taskJoin
-            } label: {
-                Image(systemName: "plus.circle")
+
+            .navigationBarItems(
+                leading: Text("App Title")
                     .font(.largeTitle)
-                    .foregroundStyle(.white)
-                    .foregroundStyle(.blue)
-            })
+                    .foregroundStyle(.white),
+                trailing: Button {
+
+                    selectedTask = .taskJoin
+                } label: {
+                    Image(systemName: "plus.circle")
+                        .font(.largeTitle)
+                        .foregroundStyle(.white)
+                        .foregroundStyle(.blue)
+                })
         }
 
     }
